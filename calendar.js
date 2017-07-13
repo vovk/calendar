@@ -70,22 +70,22 @@ $(document).ready(function(){
 	// var result;
 	function addEventToCalendar(){
 		$('.days li a').on("click", function(event){
-			// $('.ok').on("click", function () {
-			// 	t = $('.text').val();
-			// 	console.log(t);
-			// 	if(t){
-			// 		$(event.target).parent().append('<img src="img/increase.png" class="event-img"/>');
-			// 	}
-			// })
 			$('.ok').on("click", function () {
 				t = $('.text').val();
+				console.log(t);
 				if(t){
-					alert('Event add');
+					$(event.target).parent().append('<img src="img/increase.png" class="event-img"/>');
 				}
-				else{
-					console.log('empty');
-				}
-			});
+			})
+			// $('.ok').on("click", function () {
+			// 	t = $('.text').val();
+			// 	if(t){
+			// 		alert('Event add');
+			// 	}
+			// 	else{
+			// 		console.log('empty');
+			// 	}
+			// });
 		});
 	}
 	addEventToCalendar();
