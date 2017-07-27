@@ -12,9 +12,10 @@ $(document).ready(function(){
 	var month = today.getMonth();
 	var day = today.getDay();
 
-	//считаем кол-во дней в месяце
-	// var day_count = new Date(year, month, 0).getDate();
+	
 	var firstDay  = new Date( year, month, 1 );
+	var lastDay = new Date(year, month + 1, 1);
+
 
 	//функция - наименование месяца
 	Date.prototype.getMonthName = function() {
@@ -30,44 +31,63 @@ $(document).ready(function(){
 		return day[this.getDay()];
 	}
 
-	//вывод в браузер
+	Date.prototype.daysInMonth = function() {
+		return 32 - new Date(this.getFullYear(), this.getMonth(), 32).getDate();
+	};
+	//считаем кол-во дней в месяце
+	
+
+	//вывод
 	$('.month span').html(year);
 	$('.month p').html(monthName);
 
-	for (var i = 1; i < firstDay.getDay(); i++) {
-		$('.days').append('<li><a href="#">' + '*' + '</a></li>');
-		$('.days li').css('visibility', 'hidden');
 
-	}
+	console.log(firstDay.getDate(), firstDay.getDay(), lastDay.getDate(), lastDay.getDay());
+	console.log(today.daysInMonth());
 
-	//проверяем
-	// console.log('now: ' + year, monthName, day); 
-	// console.log('first day: ' + firstDay + ' ' + firstDay.getDayName());
+	//вывод дней
+	function outputDate(){
+		for (var i = 1; i < today.getDay(); i++) {
+			$('.days').append('<li><a href="#">' + '*' + '</a></li>');
+			$('.days li').css('visibility', 'hidden');
 
-	//вывод
-	while (firstDay.getMonth() == month) {
-		if(firstDay.getDate() == today.getDate()){
-			$('.days').append('<li><a href="#" data-toggle="modal" data-target="#myModal">' + firstDay.getDate() + '</a></li>');
 		}
-		else{
-			$('.days').append('<li><a href="#" data-toggle="modal", data-target="#myModal">' + firstDay.getDate() + '</a></li>');
-		}
+		// for (i = firstDay.getDay(); i <= day_count; i++){
+		// 	if(firstDay.getDate() == today.getDate()){
+		// 		$('.days').append('<li><a href="#" data-toggle="modal" data-target="#myModal">' + firstDay.getDate() + '</a></li>');
+		// 	}
+		// 	else{
+		// 		$('.days').append('<li><a href="#" data-toggle="modal", data-target="#myModal">' + firstDay.getDate() + '</a></li>');
+		// 	}
+		// 	firstDay.setDate(firstDay.getDate() + 1);
 
-        firstDay.setDate(firstDay.getDate() + 1);
+		// }
+
+		// while (firstDay.getMonth() == month) {
+		// 	if(firstDay.getDate() == today.getDate()){
+		// 		$('.days').append('<li><a href="#" data-toggle="modal" data-target="#myModal">' + firstDay.getDate() + '</a></li>');
+		// 	}
+		// 	else{
+		// 		$('.days').append('<li><a href="#" data-toggle="modal", data-target="#myModal">' + firstDay.getDate() + '</a></li>');
+		// 	}
+
+	 //        firstDay.setDate(firstDay.getDate() + 1);
+		// }
+
+
 	}
 
 	//click
-	$('.days li').click(function(){
-		if(!$(this).hasClass('active')){
-			$(this).addClass('active');
-			$(this).siblings().removeClass('active');
-		}
-		else
-			$(this).removeClass('active');
-	});
-
-	// var t = '';
-	// var result;
+	function activeClick(){
+		$('.days li').click(function(){
+			if(!$(this).hasClass('active')){
+				$(this).addClass('active');
+				$(this).siblings().removeClass('active');
+			}
+			else
+				$(this).removeClass('active');
+		});
+	}
 	function addEventToCalendar(){
 		$('.days li a').on("click", function(event){
 			$('.ok').on("click", function () {
@@ -77,21 +97,17 @@ $(document).ready(function(){
 					$(event.target).parent().append('<img src="img/increase.png" class="event-img"/>');
 				}
 			})
-			// $('.ok').on("click", function () {
-			// 	t = $('.text').val();
-			// 	if(t){
-			// 		alert('Event add');
-			// 	}
-			// 	else{
-			// 		console.log('empty');
-			// 	}
-			// });
 		});
 	}
-	addEventToCalendar();
 
-	// function buttonCheck(result){
-	// 	// if($('.text')
-	// }
+	outputDate();
+	//activeClick();
+	//addEventToCalendar();
 
+	// $('.right').on("click", function(){
+
+	// 	var next_month = month + 1;
+	// 	next_firstDay = new Date(year, next_month, 1);
+	// 	console.log(next_firstDay);
+	// });
 });

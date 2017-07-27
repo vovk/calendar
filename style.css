@@ -54,7 +54,7 @@ body {font-family: Verdana,sans-serif;}
     line-height: 50px;
     text-align: center;
     margin-bottom: 5px;
-    font-size: 12px;
+    font-size: 15px;
     margin-right: 5px; /*какого-то хуя едет верстка, когда выводим из js*/
 }
 
